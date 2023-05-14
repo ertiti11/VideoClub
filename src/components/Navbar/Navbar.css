@@ -1,0 +1,98 @@
+.navbar {
+    background-color: #fff;
+    padding: 10px;
+    color: #1f232b;
+    font-family: 'Arial', sans-serif;
+    margin: 0 0 3em 0;
+  }
+  
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .logo {
+    width: 12em;
+    height: auto;
+  }
+  
+  .menu-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu-item {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .menu-item:hover {
+    color: #61dafb;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    
+  }
+  
+  .search-input {
+    padding: 5px;
+    margin-right: 0;
+    border: none;
+    background-color: #bdbdbd;
+    color: #000000;
+    border-radius: 8px 0 0 8px;
+  }
+  
+  .search-input:focus {
+    outline: none;
+  }
+  
+  .search-button {
+    padding: 5px 10px;
+    background-color: #61dafb;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .hamburger-menu.open {
+    position: absolute;
+    right: 10px;
+  }
+  
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin-bottom: 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .menu-container {
+      display: none;
+    }
+  
+    .hamburger-menu {
+      display: flex;
+    }
+  }
+  
