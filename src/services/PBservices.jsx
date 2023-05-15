@@ -6,4 +6,6 @@ export const loggedIn = pb.authStore.isValid;
 export const token = pb.authStore.token;
 
 
-export const allVideos = await pb.collection('videos').getList(1, 50);
+export const allVideos = await pb.collection('videos').getList(1, 20,{
+    sort: '+temporada',
+});

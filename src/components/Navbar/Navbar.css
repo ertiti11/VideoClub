@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #fff;
+    background-color: #9ad642;
     padding: 10px;
     color: #1f232b;
     font-family: 'Arial', sans-serif;
@@ -15,7 +15,7 @@
   }
   
   .logo {
-    width: 12em;
+    width: 7em;
     height: auto;
   }
   
@@ -23,6 +23,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    height: 100%;
   }
   
   .menu {
@@ -30,15 +31,21 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    height: 100%;
   }
   
   .menu-item {
     margin-right: 10px;
+    padding: 1em;
     cursor: pointer;
+    margin:auto;
+    
   }
   
   .menu-item:hover {
-    color: #61dafb;
+    color: black;
+    background-color: white;
+
   }
   
   .search-container {

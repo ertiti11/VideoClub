@@ -1,33 +1,60 @@
-import "./Login.css";
+import "./SignUp.css";
 import Input from "@mui/joy/Input";
 import EmailIcon from "@mui/icons-material/Email";
 import HttpsIcon from "@mui/icons-material/Https";
 import Button from "@mui/joy/Button";
 import { styled } from "@mui/material/styles";
-import { Link,useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { pb } from "../../services/PBservices";
 
 export default function Login() {
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [location, setLocation] = useLocation();
   const [error, setError] = useState("");
-
-  
+  const [passwordConfirm, setPasswordConfirm] = useState();
   async function handleSubmit(e) {
     e.preventDefault();
-    try{
-      await pb.collection("users").authWithPassword(email, password);
-      setLocation("/", { replace: true });
-    }catch(e){
 
-      setError("email o contraseña incorrectos")
+    if (password === passwordConfirm) {
+      try {
+        await pb.collection("users").create({
+          email: email,
+          emailVisibility: true,
+          password: password,
+          passwordConfirm: passwordConfirm,
+          name: "test",
+        });
+
+        
+        setLocation("/login", { replace: true });
+        
+        
+
+      } catch (error) {
+        if (error.isAbort) {
+          setError("La solicitud fue abortada o cancelada.");
+        } else if (error.status === 400) {
+          // El error 400 se maneja aquí sin imprimir en la consola
+
+          setError("Este usuario ya ha sido registrado");
+        } else {
+          console.log(error.status);
+          setError(
+            "Error en la creación del usuario. Por favor, inténtalo nuevamente."
+          );
+          console.log("Error de API:");
+          console.log("URL:", error.url);
+          console.log("Código de estado:", error.status);
+          console.log("Respuesta de error:", error.response);
+          console.log("Error original:", error.originalError);
+        }
+      }
+    } else {
+      setError("Las contraseñas no coinciden.");
     }
-    // if(pb.authStore.isValid){
-      
-    //  // `replaceState` is used
-    // }
   }
 
   const LoginButton = styled(Button)`
@@ -53,6 +80,7 @@ export default function Login() {
             <div className="textContainer">
               <h1>Welcome!</h1>
               <p>¡empieza a ver tu serie preferida ya!</p>
+              <p>SignUp</p>
             </div>
             <p className="error">{error}</p>
             <Input
@@ -60,6 +88,7 @@ export default function Login() {
                 setEmail(evt.target.value);
               }}
               required
+              placeholder="example@gmail.com"
               type="email"
               className="loginInput"
               startDecorator={<EmailIcon className="icon" />}
@@ -70,6 +99,20 @@ export default function Login() {
             <Input
               onChange={(evt) => {
                 setPassword(evt.target.value);
+              }}
+              placeholder="password"
+              required
+              type="password"
+              className="loginInput"
+              startDecorator={<HttpsIcon className="icon" />}
+              sx={{
+                "--Input-minHeight": "50px",
+              }}
+            />
+            <Input
+              placeholder="confirm password"
+              onChange={(evt) => {
+                setPasswordConfirm(evt.target.value);
               }}
               required
               type="password"
@@ -98,7 +141,7 @@ export default function Login() {
 
             <div className="signUp">
               <p className="signUpText">don´t you have an account?</p>{" "}
-              <Link href="/signup">
+              <Link href="#">
                 <a className="active">Sign Up</a>
               </Link>
             </div>

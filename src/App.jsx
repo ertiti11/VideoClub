@@ -4,23 +4,25 @@ import Home from "./pages/Home/Home";
 import Video from "./pages/VideoPlay/VideoPlay";
 import Login from "./pages/Login/Login";
 import { loggedIn } from "./services/PBservices";
+import SignUp from "./pages/SignUp/SignUp"
 function App() {
   const [location, navigate] = useLocation();
 
   return (
     <>
       <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp}  />
         {loggedIn && (
-          <Route path="/video/:collectionId/:id/:videoName" component={Video} />
+          <Route
+            path="/video/:collectionId/:id/:videoName"
+            component={Video}
+            
+          />
         )}
+        
         {loggedIn && <Route path="/" component={Home} />}
-        {!loggedIn && (
-          <>
-            <Route path="/login" component={Login} />
-            {loggedIn === false && navigate("/login")}{" "}
-            {/* Redirige solo si loggedIn es falso */}
-          </>
-        )}
+        {!loggedIn && navigate("/login", { replace: true })} {/* Redirige si no está logueado */}
       </Switch>
     </>
   );

@@ -3,10 +3,7 @@ import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import "./VideoPlay.css";
 
 export default function Video({ params }) {
-  const { collectionId } = params;
-  const { id } = params;
-
-  const { videoName } = params;
+  const { collectionId, id, videoName, additionalParam } = params;
 
   console.log(videoName);
   // console.log(collectionId, id, video)
